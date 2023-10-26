@@ -18,7 +18,7 @@ export default async function Home() {
           </h2>
           <p className="mt-3 text-gray-600 dark:text-gray-400">
             沖縄県恩納村唯一の建築資材店 <br />
-            ライフポイントの在庫を検索できます。
+            ライフポイントの在庫を検索できます
           </p>
 
           <div className="mt-7 sm:mt-12 mx-auto max-w-xl relative">
