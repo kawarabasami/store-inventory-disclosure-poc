@@ -8,7 +8,7 @@ export default async function Home() {
   // https://preline.co/examples/hero-forms.html
   return (
     <div className="relative overflow-hidden">
-      <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-24">
+      <div className="max-w-none mx-auto py-10 sm:py-24">
         <div className="text-center">
           <div className="bg-[url('/cropped-minna.jpg')] bg-top bg-cover h-24 sm:h-32 flex justify-center flex-col">
             <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 ">
@@ -18,7 +18,7 @@ export default async function Home() {
               在庫検索システム
             </h2>
           </div>
-          <p className="mt-3 text-gray-600 dark:text-gray-400">
+          <p className="mt-8 text-gray-600 dark:text-gray-400">
             沖縄県恩納村唯一の建築資材店 <br />
             ライフポイントの在庫を検索できます
           </p>
