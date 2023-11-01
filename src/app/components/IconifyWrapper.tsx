@@ -9,9 +9,9 @@ const IconifyWrapper: React.FC<{
   size?: string;
 }> = ({ className, icon, size = "1rem" }) => {
   return (
-    <div className={className}>
-      <Icon icon={icon} style={{ fontSize: size }} />
-    </div>
+    <>
+      <Icon icon={icon} className={className} style={{ fontSize: size }} />
+    </>
   );
 };
 

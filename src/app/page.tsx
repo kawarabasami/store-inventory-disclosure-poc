@@ -26,7 +26,7 @@ export default async function Home() {
             ライフポイントの在庫を検索できます
           </p>
 
-          <div className="mt-8 sm:mt-16 mx-auto max-w-xl relative">
+          <div className="mt-8 sm:mt-16 mx-auto max-w-sm sm:max-w-xl relative">
             <form>
               <div className="relative z-10 flex space-x-3 p-3 bg-white border rounded-lg shadow-lg shadow-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:shadow-gray-900/[.2]">
                 <div className="flex-[1_0_0%]">
@@ -74,14 +74,24 @@ export default async function Home() {
             </div>
           </div>
 
-          <div className="mt-10 sm:mt-20">
-            <a
-              className="m-1 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
-              href="#"
-            >
-              <IconifyWrapper icon="material-symbols:10k-outline-sharp" />
-              Business
-            </a>
+          <h3 className="mt-10 text-lg sm:text-xl">取り扱い品目数</h3>
+          <div className="mt-5">
+            <div className="m-1 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
+              <IconifyWrapper icon="material-symbols:hardware" />
+              金物: 200点
+            </div>
+            <div className="m-1 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
+              <IconifyWrapper icon="fluent:pipeline-24-filled" />
+              水道資材: 200点
+            </div>
+            <div className="m-1 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
+              <IconifyWrapper icon="tabler:wood" />
+              木材: 200点
+            </div>
+            <div className="m-1 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
+              <IconifyWrapper icon="healthicons:cleaning" />
+              清掃道具: 200点
+            </div>
           </div>
         </div>
       </div>
