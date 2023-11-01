@@ -11,5 +11,8 @@
   },
   "[markdown]": {
     "files.trimTrailingWhitespace": false
+  },
+  "[xml]": {
+    "editor.defaultFormatter": "redhat.vscode-xml"
   }
 }
