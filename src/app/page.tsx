@@ -14,7 +14,6 @@ export default async function Home() {
       <div className="max-w-none mx-auto py-5 sm:pt-6">
         <div className="text-center">
           <div className="bg-[url('/cropped-minna.jpg')] bg-top bg-cover h-48 flex justify-center flex-col items-center">
-            {/* <div className="flex justify-center items-center gap-2"> */}
             <img src="/images/logo.png" width={70} height={70} alt="logo" />
             <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 ">
               ライフポイント

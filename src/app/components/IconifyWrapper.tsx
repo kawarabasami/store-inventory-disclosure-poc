@@ -5,13 +5,30 @@ import React from "react";
 
 const IconifyWrapper: React.FC<{
   className?: string;
+  containerClassName?: string;
   icon: string;
   size?: string;
-}> = ({ className, icon, size = "1rem" }) => {
+  color?: string;
+  bgColor?: string;
+}> = ({
+  className,
+  containerClassName = "",
+  icon,
+  size = "1rem",
+  color,
+  bgColor,
+}) => {
   return (
-    <>
-      <Icon icon={icon} className={className} style={{ fontSize: size }} />
-    </>
+    <div
+      className={`flex justify-center items-center ${containerClassName}`}
+      style={{ width: size, height: size, backgroundColor: bgColor }}
+    >
+      <Icon
+        icon={icon}
+        className={className}
+        style={{ fontSize: size, color }}
+      />
+    </div>
   );
 };
 
