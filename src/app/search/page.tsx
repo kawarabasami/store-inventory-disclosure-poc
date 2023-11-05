@@ -1,16 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
-import { supabase } from "@/utils/supabase/supabaseClient";
-import SearchIcon from "@/../public/icons/search.svg";
-import SearchBoxAccent1 from "@/../public/images/SearchBoxAccent1.svg";
-import SearchBoxAccent2 from "@/../public/images/SearchBoxAccent2.svg";
-import IconifyWrapper from "../components/IconifyWrapper";
 
 export default async function Home() {
-  const { data, error } = await supabase.from("product_categories").select();
   // Flowriftから参考
   // https://flowrift.com/c/shopping-cart/1DPLi?view=preview
   return (
-    <div className="bg-white py-6 sm:py-8 lg:py-12">
+    <div className="py-6 sm:py-8 lg:py-12">
       <div className="mx-auto max-w-screen-lg px-4 md:px-8">
         <div className="mb-6 sm:mb-10 lg:mb-16">
           <h2 className="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">

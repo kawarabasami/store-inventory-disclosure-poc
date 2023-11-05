@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { supabase } from "@/utils/supabase/supabaseClient";
 import IconifyWrapper from "./components/IconifyWrapper";
-import SearchIcon from "@/../public/icons/search.svg";
 import SearchBoxAccent1 from "@/../public/images/SearchBoxAccent1.svg";
 import SearchBoxAccent2 from "@/../public/images/SearchBoxAccent2.svg";
 import SearchBox from "./components/SearchBox";
@@ -11,14 +10,17 @@ export default async function Home() {
   // prerine UIから参考
   // https://preline.co/examples/hero-forms.html
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-hidden pt-10">
       <div className="max-w-none mx-auto py-5 sm:pt-6">
         <div className="text-center">
-          <div className="bg-[url('/cropped-minna.jpg')] bg-top bg-cover h-36 sm:h-44 flex justify-center flex-col">
+          <div className="bg-[url('/cropped-minna.jpg')] bg-top bg-cover h-48 flex justify-center flex-col items-center">
+            {/* <div className="flex justify-center items-center gap-2"> */}
+            <img src="/images/logo.png" width={70} height={70} alt="logo" />
             <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 ">
               ライフポイント
             </h1>
-            <h2 className="title-font text-xl sm:text-2xl mt-4 font-medium text-orange-600">
+            {/* </div> */}
+            <h2 className="title-font text-xl sm:text-2xl my-4 font-medium text-orange-600">
               在庫検索システム
             </h2>
           </div>
