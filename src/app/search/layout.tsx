@@ -15,9 +15,9 @@ export default function RootLayout({
 }) {
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-amber-50 via-transparent to-transparent pb-12 sm:pb-8 lg:pb-12 ">
-      <div className="lg:pb-12">
-        <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
-          <header className="flex items-center justify-between py-4 md:py-8">
+      <div className="lg:pb-12 ">
+        <div className="mx-auto max-w-screen-2xl px-4 md:px-8 bg-[url('/cropped-minna.jpg')] bg-top bg-cover ">
+          <header className="flex items-center justify-between py-4 ">
             {/* logo - start */}
             <a
               href="/"
