@@ -9,9 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@iconify/json": "^2.2.133",
-    "@supabase/supabase-js": "^2.38.2",
-    "next": "13.5.4",
+    "@iconify/json": "^2.2.137",
+    "@supabase/supabase-js": "^2.38.4",
+    "next": "14.0.1",
     "react": "^18",
     "react-dom": "^18"
   },
@@ -25,7 +25,7 @@
     "@types/react-dom": "^18",
     "autoprefixer": "^10",
     "eslint": "^8",
-    "eslint-config-next": "13.5.4",
+    "eslint-config-next": "14.0.1",
     "postcss": "^8",
     "tailwindcss": "^3",
     "typescript": "^5"
