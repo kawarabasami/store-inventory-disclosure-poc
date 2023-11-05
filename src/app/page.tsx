@@ -4,6 +4,7 @@ import IconifyWrapper from "./components/IconifyWrapper";
 import SearchIcon from "@/../public/icons/search.svg";
 import SearchBoxAccent1 from "@/../public/images/SearchBoxAccent1.svg";
 import SearchBoxAccent2 from "@/../public/images/SearchBoxAccent2.svg";
+import SearchBox from "./components/SearchBox";
 
 export default async function Home() {
   const { data, error } = await supabase.from("product_categories").select();
@@ -27,32 +28,7 @@ export default async function Home() {
           </p>
 
           <div className="mt-8 sm:mt-16 mx-auto max-w-sm sm:max-w-xl relative">
-            <form>
-              <div className="relative z-10 flex space-x-3 p-3 bg-white border rounded-lg shadow-lg shadow-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:shadow-gray-900/[.2]">
-                <div className="flex-[1_0_0%]">
-                  <label
-                    htmlFor="search-product-name"
-                    className="block text-sm text-gray-700 font-medium dark:text-white"
-                  >
-                    <span className="sr-only">商品名で検索</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="search-product-name"
-                    className="p-3 block w-full border-transparent rounded-md focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:text-gray-400"
-                    placeholder="商品名で検索"
-                  />
-                </div>
-                <div className="flex-[0_0_auto]">
-                  <a
-                    className="p-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
-                    href="#"
-                  >
-                    <SearchIcon />
-                  </a>
-                </div>
-              </div>
-            </form>
+            <SearchBox />
             <div className="hidden md:block absolute top-0 right-0 -translate-y-12 translate-x-20">
               <SearchBoxAccent1
                 className="w-16 h-auto text-orange-500"
