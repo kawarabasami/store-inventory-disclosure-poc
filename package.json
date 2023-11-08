@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "update-schema": "supabase gen types typescript --linked > src/utils/supabase/types.ts"
   },
   "dependencies": {
     "@iconify/json": "^2.2.137",
@@ -28,6 +29,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.0.1",
     "postcss": "^8",
+    "supabase": "^1.110.1",
     "tailwindcss": "^3",
     "typescript": "^5"
   }
