@@ -23,13 +23,18 @@ const SearchBox: React.FC<Args> = ({ value, onChange, onSearch }) => {
           <input
             type="text"
             id="search-text"
+            className="p-3 block w-full border-transparent rounded-md focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:text-gray-400"
+            placeholder="商品名で検索"
             value={value}
             onChange={(event) => {
               const value = event.target.value.trim();
               onChange(value);
             }}
-            className="p-3 block w-full border-transparent rounded-md focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:text-gray-400"
-            placeholder="商品名で検索"
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                onSearch(value);
+              }
+            }}
           />
         </div>
         <button
