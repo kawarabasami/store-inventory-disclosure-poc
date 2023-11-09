@@ -7,6 +7,8 @@ const ProductView: React.FC<{
   product: Product;
   icon: { id: string; color: string; bgColor: string };
 }> = ({ product, icon }) => {
+  const isInStock = product.amount > 0;
+
   return (
     <div className="py-5 sm:pt-5 border-b flex flex-wrap justify-center items-center gap-4 sm:py-2.5 lg:gap-6 ">
       <IconifyWrapper
@@ -24,32 +26,32 @@ const ProductView: React.FC<{
           >
             {product.productName}
           </a>
-          <span className="block text-gray-500">
+          <span className="block text-gray-500 text-sm">
             カテゴリ: {product.productCategoryName}
           </span>
-          <span className="block text-gray-500">
+          <span className="block text-gray-500 text-sm">
             商品コード: {product.productId}
           </span>
-          <span className="block text-gray-500">
+          <span className="block text-gray-500 text-sm">
             更新日時: {format(product.updatedAt, "yyyy/MM/dd HH:mm:ss")}
           </span>
         </div>
         <div className="flex justify-end">
-          <span className="mb-1 font-bold text-gray-800 md:text-lg flex items-center gap-1 ">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 text-green-500"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M5 13l4 4L19 7"
+          <span className="mb-1 font-bold text-gray-800 text-xl flex items-center gap-1 ">
+            {isInStock && (
+              <IconifyWrapper
+                icon="ic:round-check"
+                color="rgb(34 197 94)"
+                size="1.5rem"
               />
-            </svg>
+            )}
+            {!isInStock && (
+              <IconifyWrapper
+                icon="akar-icons:cross"
+                color="red"
+                size="1.2rem"
+              />
+            )}
             在庫数: {product.amount}
           </span>
         </div>
