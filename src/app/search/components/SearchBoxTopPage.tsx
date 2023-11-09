@@ -15,14 +15,6 @@ const SearchBoxTopPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onChange = (value: string) => {
-    // 値取得
-    setQuery(value);
-
-    // historyに残らないよう、replaceを使ってURL書き換え
-    router.replace(`${pathname}${createQueryParam("q", value)}`);
-  };
-
   const createQueryParam = useCallback(
     (name: string, value: string) => {
       if (!value) return "";

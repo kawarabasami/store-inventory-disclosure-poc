@@ -26,7 +26,6 @@ const SearchBox: React.FC<Args> = ({ value, onChange, onSearch }) => {
             value={value}
             onChange={(event) => {
               const value = event.target.value.trim();
-              console.log(onChange);
               onChange(value);
             }}
             className="p-3 block w-full border-transparent rounded-md focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:text-gray-400"
