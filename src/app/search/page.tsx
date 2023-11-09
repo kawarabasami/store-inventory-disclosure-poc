@@ -10,6 +10,7 @@ import { Product } from "@/domain/product/types";
 import { ProductCategory } from "@/domain/productCategory/types";
 import SearchBox from "../components/SearchBox";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import Loading from "./components/Loading";
 
 export default function Home() {
   // Flowriftから参考
@@ -22,6 +23,7 @@ export default function Home() {
   const [searchText, setSearchText] = useState("");
   const [result, setResult] = useState<Product[]>([]);
   const [categories, setCategories] = useState<ProductCategory[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const init = async () => {
     // カテゴリ情報(アイコンなど)の取得
@@ -29,7 +31,9 @@ export default function Home() {
   };
   const search = async (value: string) => {
     // 商品情報検索
+    setLoading(true);
     setResult(await searchProducts(value));
+    setLoading(false);
   };
 
   // 初期処理
@@ -79,27 +83,30 @@ export default function Home() {
             <h2 className="text-2xl font-bold text-gray-800 lg:text-3xl">
               検索結果
             </h2>
-            <span>件数: {result.length}件</span>
+            {!loading && <span>件数: {result.length}件</span>}
           </div>
         </div>
-        <div className="mb-5 flex flex-col sm:mb-8 sm:divide-y border-t border-b">
-          {result.map((r, index) => {
-            const category = categories.find(
-              (c) => c.productCategoryId === r.productCategoryId
-            );
+        {loading && <Loading />}
+        {!loading && (
+          <div className="mb-5 flex flex-col sm:mb-8 sm:divide-y border-t border-b">
+            {result.map((r, index) => {
+              const category = categories.find(
+                (c) => c.productCategoryId === r.productCategoryId
+              );
 
-            const icon =
-              category != null
-                ? {
-                    id: category.iconId,
-                    color: category.iconColor,
-                    bgColor: category.iconBgColor,
-                  }
-                : ICON_OTHER;
+              const icon =
+                category != null
+                  ? {
+                      id: category.iconId,
+                      color: category.iconColor,
+                      bgColor: category.iconBgColor,
+                    }
+                  : ICON_OTHER;
 
-            return <ProductView key={index} product={r} icon={icon} />;
-          })}
-        </div>
+              return <ProductView key={index} product={r} icon={icon} />;
+            })}
+          </div>
+        )}
       </div>
     </div>
   );
