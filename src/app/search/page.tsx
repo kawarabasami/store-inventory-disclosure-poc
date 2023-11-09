@@ -2,13 +2,13 @@
 
 /* eslint-disable @next/next/no-img-element */
 import { searchProducts } from "@/domain/product/repository";
-import SearchBox from "../components/SearchBox";
 import ProductView from "./components/ProductView";
 import { fetchAllCategories } from "@/domain/productCategory/repository";
 import { ICON_OTHER } from "@/domain/productCategory/constants";
 import { useEffect, useState } from "react";
 import { Product } from "@/domain/product/types";
 import { ProductCategory } from "@/domain/productCategory/types";
+import SearchBox from "../components/SearchBox";
 
 export default function Home() {
   // Flowriftから参考
@@ -33,7 +33,7 @@ export default function Home() {
     <div className="py-6 ">
       <div className="mx-auto max-w-screen-lg px-4 md:px-8">
         <div className="mb-3 sm:mb-5 lg:mb-8">
-          <SearchBox />
+          <SearchBox value={"test"} onChange={() => {}} onSearch={() => {}} />
 
           <div className="flex mt-8 mb-2 md:mb-6 items-center justify-between">
             <h2 className="text-2xl font-bold text-gray-800 lg:text-3xl">

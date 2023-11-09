@@ -3,7 +3,7 @@ import { supabase } from "@/utils/supabase/supabaseClient";
 import IconifyWrapper from "./components/IconifyWrapper";
 import SearchBoxAccent1 from "@/../public/images/SearchBoxAccent1.svg";
 import SearchBoxAccent2 from "@/../public/images/SearchBoxAccent2.svg";
-import SearchBox from "./components/SearchBox";
+import SearchBoxTopPage from "./search/components/SearchBoxTopPage";
 
 export default async function Home() {
   const { data, error } = await supabase.from("product_categories").select();
@@ -29,7 +29,7 @@ export default async function Home() {
           </p>
 
           <div className="mt-8 sm:mt-16 mx-auto max-w-sm sm:max-w-xl relative">
-            <SearchBox />
+            <SearchBoxTopPage />
             <div className="hidden md:block absolute top-0 right-0 -translate-y-12 translate-x-20">
               <SearchBoxAccent1
                 className="w-16 h-auto text-orange-500"
