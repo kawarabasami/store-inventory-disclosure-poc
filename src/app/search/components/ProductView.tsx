@@ -3,11 +3,16 @@ import { Product } from "@/domain/product/types";
 import { format } from "date-fns";
 import React from "react";
 
+function toDateString(date: Date | null) {
+  if (date == null) return "-";
+  return format(date, "yyyy/MM/dd HH:mm:ss");
+}
+
 const ProductView: React.FC<{
   product: Product;
   icon: { id: string; color: string; bgColor: string };
 }> = ({ product, icon }) => {
-  const isInStock = product.amount > 0;
+  const isInStock = product.amount != null && product.amount > 0;
 
   return (
     <div className="py-5 sm:pt-5 border-b flex flex-wrap justify-center items-center gap-4 sm:py-2.5 lg:gap-6 ">
@@ -33,7 +38,7 @@ const ProductView: React.FC<{
             商品コード: {product.productId}
           </span>
           <span className="block text-gray-500 text-sm">
-            更新日時: {format(product.updatedAt, "yyyy/MM/dd HH:mm:ss")}
+            更新日時: {toDateString(product.updatedAt)}
           </span>
         </div>
         <div className="flex justify-end">
@@ -52,7 +57,7 @@ const ProductView: React.FC<{
                 size="1.2rem"
               />
             )}
-            在庫数: {product.amount}
+            在庫数: {product.amount ?? "-"}
           </span>
         </div>
       </div>

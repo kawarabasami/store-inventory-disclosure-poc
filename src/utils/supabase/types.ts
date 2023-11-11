@@ -115,7 +115,29 @@ export interface Database {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      find_product_name: {
+        Args: {
+          keyword: string
+        }
+        Returns: {
+          product_category_id: string
+          product_id: string
+          product_name: string
+        }[]
+      }
+      search_product_name: {
+        Args: {
+          keyword: string
+        }
+        Returns: {
+          product_id: string
+          product_name: string
+          product_category_id: string
+          product_category_name: string
+          amount: number
+          updated_at: string
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never

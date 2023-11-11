@@ -3,6 +3,6 @@ export interface Product {
   productCategoryId: string;
   productCategoryName: string;
   productName: string;
-  amount: number;
-  updatedAt: Date;
+  amount: number | null;
+  updatedAt: Date | null;
 }
