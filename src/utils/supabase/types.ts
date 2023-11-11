@@ -115,14 +115,11 @@ export interface Database {
       [_ in never]: never
     }
     Functions: {
-      find_product_name: {
-        Args: {
-          keyword: string
-        }
+      calc_count_products_by_category: {
+        Args: Record<PropertyKey, never>
         Returns: {
           product_category_id: string
-          product_id: string
-          product_name: string
+          counts: number
         }[]
       }
       search_product_name: {

@@ -4,9 +4,17 @@ import IconifyWrapper from "./components/IconifyWrapper";
 import SearchBoxAccent1 from "@/../public/images/SearchBoxAccent1.svg";
 import SearchBoxAccent2 from "@/../public/images/SearchBoxAccent2.svg";
 import SearchBoxTopPage from "./search/components/SearchBoxTopPage";
+import CategoryCountBox from "./components/CategoryCountBox";
+import {
+  calcCountProductsByCategory,
+  fetchAllCategories,
+} from "@/domain/productCategory/repository";
+import { format } from "date-fns";
 
 export default async function Home() {
-  const { data, error } = await supabase.from("product_categories").select();
+  const categories = await fetchAllCategories();
+  const countsByCategory = await calcCountProductsByCategory();
+
   // prerine UIから参考
   // https://preline.co/examples/hero-forms.html
   return (
@@ -51,23 +59,26 @@ export default async function Home() {
             </div>
           </div>
 
-          <h3 className="mt-10 text-lg sm:text-xl">取り扱い品目数</h3>
-          <div className="mt-5">
-            <div className="m-1 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
-              <IconifyWrapper icon="material-symbols:hardware" />
-              金物: 200点
-            </div>
-            <div className="m-1 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
-              <IconifyWrapper icon="fluent:pipeline-24-filled" />
-              水道資材: 200点
-            </div>
-            <div className="m-1 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
-              <IconifyWrapper icon="tabler:wood" />
-              木材: 200点
-            </div>
-            <div className="m-1 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
-              <IconifyWrapper icon="healthicons:cleaning" />
-              清掃道具: 200点
+          <div className="flex flex-col justify-center items-center">
+            <h3 className="mt-10 text-lg sm:text-xl">取り扱い品目数</h3>
+
+            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+              {format(new Date(), "yyyy/MM/dd HH:mm") + "更新"}
+            </p>
+            <div className="mt-5 sm:w-1/2">
+              {countsByCategory.map((c, index) => {
+                const category = categories.find(
+                  (cate) => cate.productCategoryId === c.productCategoryId
+                );
+                if (category == null) throw new Error("category can not find.");
+                return (
+                  <CategoryCountBox
+                    key={index}
+                    countInfo={c}
+                    category={category}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>

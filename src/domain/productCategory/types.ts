@@ -5,3 +5,8 @@ export interface ProductCategory {
   iconColor: string;
   iconBgColor: string;
 }
+
+export interface CountProductsByCategory {
+  productCategoryId: string;
+  countProducts: number;
+}
