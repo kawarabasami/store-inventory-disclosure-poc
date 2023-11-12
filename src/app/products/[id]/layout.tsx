@@ -1,4 +1,6 @@
-import Header from "../components/Header";
+/* eslint-disable @next/next/no-img-element */
+
+import Header from "@/app/components/Header";
 
 export default function RootLayout({
   children,

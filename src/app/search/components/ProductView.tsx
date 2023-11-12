@@ -6,7 +6,7 @@ import React from "react";
 
 function toDateString(date: Date | null) {
   if (date == null) return "-";
-  return format(date, "yyyy/MM/dd HH:mm:ss");
+  return format(date, "yyyy/MM/dd HH:mm");
 }
 
 const ProductView: React.FC<{
@@ -28,6 +28,7 @@ const ProductView: React.FC<{
         <div>
           <Link
             href={`products/${product.productId}`}
+            target="_blank"
             className="mb-1 inline-block text-lg font-bold text-gray-800 transition duration-100 hover:text-gray-500 lg:text-xl"
           >
             {product.productName}
