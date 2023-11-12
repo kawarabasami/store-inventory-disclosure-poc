@@ -1,6 +1,7 @@
 import IconifyWrapper from "@/app/components/IconifyWrapper";
 import { Product } from "@/domain/product/types";
 import { format } from "date-fns";
+import Link from "next/link";
 import React from "react";
 
 function toDateString(date: Date | null) {
@@ -25,12 +26,12 @@ const ProductView: React.FC<{
       />
       <div className="flex flex-1 flex-col justify-between">
         <div>
-          <a
-            href="#"
+          <Link
+            href={`products/${product.productId}`}
             className="mb-1 inline-block text-lg font-bold text-gray-800 transition duration-100 hover:text-gray-500 lg:text-xl"
           >
             {product.productName}
-          </a>
+          </Link>
           <span className="block text-gray-500 text-sm">
             カテゴリ: {product.productCategoryName}
           </span>

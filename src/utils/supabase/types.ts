@@ -122,7 +122,31 @@ export interface Database {
           counts: number
         }[]
       }
-      search_product_name: {
+      fetch_all_products: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          product_id: string
+          product_name: string
+          product_category_id: string
+          product_category_name: string
+          amount: number
+          updated_at: string
+        }[]
+      }
+      fetch_product: {
+        Args: {
+          target_product_id: string
+        }
+        Returns: {
+          product_id: string
+          product_name: string
+          product_category_id: string
+          product_category_name: string
+          amount: number
+          updated_at: string
+        }[]
+      }
+      search_products: {
         Args: {
           keyword: string
         }

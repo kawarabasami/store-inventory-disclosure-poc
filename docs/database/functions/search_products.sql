@@ -1,6 +1,6 @@
 -- 商品名検索用ファンクション
-DROP FUNCTION search_product_name;
-CREATE FUNCTION search_product_name(keyword text)
+DROP FUNCTION search_products;
+CREATE FUNCTION search_products(keyword text)
   RETURNS TABLE (
       product_id varchar
     , product_name varchar
