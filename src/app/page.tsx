@@ -1,6 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import { supabase } from "@/utils/supabase/supabaseClient";
-import IconifyWrapper from "./components/IconifyWrapper";
 import SearchBoxAccent1 from "@/../public/images/SearchBoxAccent1.svg";
 import SearchBoxAccent2 from "@/../public/images/SearchBoxAccent2.svg";
 import SearchBoxTopPage from "./search/components/SearchBoxTopPage";

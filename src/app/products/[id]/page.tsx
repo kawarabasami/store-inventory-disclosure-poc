@@ -1,10 +1,10 @@
 import IconifyWrapper from "@/app/components/IconifyWrapper";
-import ProductView from "@/app/search/components/ProductView";
 import { fetchAllProducts, fetchProduct } from "@/domain/product/repository";
 import { ICON_OTHER } from "@/domain/productCategory/constants";
 import { fetchAllCategories } from "@/domain/productCategory/repository";
 import { format } from "date-fns";
 import React from "react";
+import Contacts from "./components/Contacts";
 
 export async function generateStaticParams() {
   const products = await fetchAllProducts();
@@ -41,8 +41,8 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   return (
     <div className="py-6 sm:py-8 lg:py-12">
-      <div className="mx-auto max-w-screen-xl px-4 md:px-8">
-        <div className="flex gap-8 items-center">
+      <div className="mx-auto max-w-screen-xl px-4 md:px-8 flex flex-col items-center">
+        <div className="flex gap-8 items-center justify-center mb-10">
           {/* images - start */}
           <div className="gap-4">
             <div className="relative overflow-hidden rounded-lg bg-gray-100 lg:col-span-4">
@@ -57,7 +57,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           </div>
           {/* images - end */}
           {/* content - start */}
-          <div className="pt-8">
+          <div className="pt-8 pr-5 sm:pr-10">
             {/* name - start */}
             <div className="mb-2 md:mb-3">
               <h2 className="mb-3 text-2xl font-bold text-gray-800 lg:text-3xl">
@@ -77,7 +77,7 @@ export default async function Page({ params }: { params: { id: string } }) {
             {/* price - start */}
             <div className="mb-4 mt-5">
               <div className="flex justify-end">
-                <span className="mb-1 font-bold text-gray-800 text-xl flex items-center gap-1 ">
+                <span className="mb-1 font-bold text-gray-800 text-2xl sm:text-3xl flex items-center gap-1 ">
                   {isInStock && (
                     <IconifyWrapper
                       icon="ic:round-check"
@@ -100,6 +100,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           </div>
           {/* content - end */}
         </div>
+        <Contacts />
       </div>
     </div>
   );
