@@ -1,0 +1,9 @@
+
+@url = {{$dotenv SUPABASE_URL}}
+@anonKey = {{$dotenv SUPABASE_ANON_KEY}}
+
+post {{url}}/functions/v1/hello-world
+Authorization: Bearer {{anonKey}}
+Content-Type: application/json
+
+{ "name":"Functions" }
