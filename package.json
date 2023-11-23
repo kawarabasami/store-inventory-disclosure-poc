@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next build && serve out",
     "lint": "next lint",
-    "update-schema": "supabase gen types typescript --linked > src/utils/supabase/types.ts"
+    "update-schema": "supabase gen types typescript --linked > src/utils/supabase/types.ts",
+    "deploy-functions": "supabase functions deploy"
   },
   "dependencies": {
     "@iconify/json": "^2.2.137",

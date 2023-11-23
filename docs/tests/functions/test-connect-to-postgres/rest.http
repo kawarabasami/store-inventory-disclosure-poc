@@ -1,0 +1,7 @@
+
+@url = {{$dotenv SUPABASE_URL}}
+@anonKey = {{$dotenv SUPABASE_ANON_KEY}}
+
+get {{url}}/functions/v1/test-connect-to-postgres
+Authorization: Bearer {{anonKey}}
+Content-Type: application/json
