@@ -25,6 +25,6 @@ Content-Type: application/json
   {
     "productId": "test-product4",
     "productName": "テスト商品44",
-    "productCategoryId": "4"
+    "productCategoryId": "499"
   }
 ]

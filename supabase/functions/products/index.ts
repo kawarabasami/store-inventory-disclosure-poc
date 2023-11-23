@@ -17,18 +17,24 @@ Deno.serve(async (req) => {
   try {
     // Grab a connection from the pool
     const connection = await pool.connect();
-
     const query = `
+    with InsertData(product_id, product_category_id, product_name) as (
+      values ${makeValuesStringPlaceholders(inputs.length, 3)}
+    ), CheckedData as (
+      select product_id, product_category_id, product_name
+      from InsertData d
+      where EXISTS 
+        (select * from product_categories c where d.product_category_id = c.product_category_id)
+    )
     INSERT INTO products 
       (product_id, product_category_id, product_name)
-    VALUES
-      ${makeValuesStringPlaceholders(inputs.length, 3)}
+      select product_id, product_category_id, product_name from CheckedData
     ON CONFLICT (product_id)
     DO UPDATE SET
       product_category_id = excluded.product_category_id
-    , product_name = excluded.product_name;
+    , product_name = excluded.product_name
+    RETURNING product_id;
   `;
-    console.log(query);
 
     try {
       // Run a query
@@ -40,9 +46,9 @@ Deno.serve(async (req) => {
           "productName",
         ]),
       });
-
+      console.log(result);
       // Encode the result as pretty printed JSON
-      const body = JSON.stringify({ result });
+      const body = JSON.stringify({ registerd: result.rows });
 
       // Return the response with the correct content type header
       return new Response(body, {
