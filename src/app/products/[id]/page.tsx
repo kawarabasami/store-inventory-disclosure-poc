@@ -37,7 +37,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           bgColor: category.iconBgColor,
         }
       : ICON_OTHER;
-  const isInStock = product.amount != null && product.amount > 0;
+  const isInStock = product.quantity != null && product.quantity > 0;
 
   return (
     <div className="py-6 sm:py-8 lg:py-12">
@@ -92,7 +92,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                       size="1.2rem"
                     />
                   )}
-                  在庫数: {product.amount ?? "-"}
+                  在庫数: {product.quantity ?? "-"}
                 </span>
               </div>
             </div>

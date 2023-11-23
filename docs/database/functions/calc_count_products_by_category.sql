@@ -3,7 +3,7 @@ DROP FUNCTION calc_count_products_by_category;
 CREATE FUNCTION calc_count_products_by_category()
   RETURNS TABLE (
       product_category_id varchar
-    , counts bigint
+    , counts integer
   ) AS $$
 BEGIN
   RETURN QUERY
@@ -13,7 +13,7 @@ BEGIN
     from product_inventories pi
     inner join products p
     on pi.product_id = p.product_id
-    where pi.amount > 0
+    where pi.quantity > 0
     group by p.product_category_id
     order by p.product_category_id::integer
 ;

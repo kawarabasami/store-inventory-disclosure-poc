@@ -60,18 +60,18 @@ export interface Database {
       }
       product_inventories: {
         Row: {
-          amount: number
           product_id: string
+          quantity: number
           updated_at: string
         }
         Insert: {
-          amount: number
           product_id: string
+          quantity: number
           updated_at?: string
         }
         Update: {
-          amount?: number
           product_id?: string
+          quantity?: number
           updated_at?: string
         }
         Relationships: [
@@ -129,7 +129,7 @@ export interface Database {
           product_name: string
           product_category_id: string
           product_category_name: string
-          amount: number
+          quantity: number
           updated_at: string
         }[]
       }
@@ -142,7 +142,7 @@ export interface Database {
           product_name: string
           product_category_id: string
           product_category_name: string
-          amount: number
+          quantity: number
           updated_at: string
         }[]
       }
@@ -155,7 +155,7 @@ export interface Database {
           product_name: string
           product_category_id: string
           product_category_name: string
-          amount: number
+          quantity: number
           updated_at: string
         }[]
       }

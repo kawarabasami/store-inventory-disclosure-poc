@@ -10,7 +10,7 @@ interface ProductRawData {
   product_name: string;
   product_category_id: string;
   product_category_name: string;
-  amount: number;
+  quantity: number;
   updated_at: string | null;
 }
 
@@ -20,7 +20,7 @@ function toPoduct(d: ProductRawData) {
     productCategoryId: d.product_category_id,
     productCategoryName: d.product_category_name,
     productName: d.product_name,
-    amount: d.amount,
+    quantity: d.quantity,
     updatedAt: d.updated_at != null ? new Date(d.updated_at) : null,
   };
 }
