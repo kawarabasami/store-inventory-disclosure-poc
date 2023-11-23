@@ -2,8 +2,13 @@
 @url = {{$dotenv SUPABASE_URL}}
 @anonKey = {{$dotenv SUPABASE_ANON_KEY}}
 
-post {{url}}/functions/v1/hello-world
+post {{url}}/functions/v1/product-inventories
 Authorization: Bearer {{anonKey}}
 Content-Type: application/json
 
-{ "name":"Functions" }
+[
+  {
+    "productId": "test-product1",
+    "quantity": 10
+  }
+]

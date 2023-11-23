@@ -39,6 +39,8 @@ export default async function Page({ params }: { params: { id: string } }) {
       : ICON_OTHER;
   const isInStock = product.quantity != null && product.quantity > 0;
 
+  console.log(product);
+
   return (
     <div className="py-6 sm:py-8 lg:py-12">
       <div className="mx-auto max-w-screen-xl px-4 md:px-8 flex flex-col items-center">
