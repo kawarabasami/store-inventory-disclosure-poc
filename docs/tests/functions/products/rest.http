@@ -8,7 +8,7 @@ Content-Type: application/json
 
 [
   {
-    "productId": "test-product1",
+    "productId": "test-product111",
     "productName": "テスト商品1",
     "productCategoryId": "1"
   },
@@ -24,7 +24,7 @@ Content-Type: application/json
   },
   {
     "productId": "test-product4",
-    "productName": "テスト商品4444444",
+    "productName": "テスト商品44",
     "productCategoryId": "4"
   }
 ]
