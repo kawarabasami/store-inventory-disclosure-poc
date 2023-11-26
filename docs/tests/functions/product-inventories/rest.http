@@ -6,9 +6,15 @@ post {{url}}/functions/v1/product-inventories
 Authorization: Bearer {{anonKey}}
 Content-Type: application/json
 
-[
-  {
-    "productId": "test-product1",
-    "quantity": 10
-  }
-]
+{
+  "productInventories": [
+    {
+      "productId": "test-product1",
+      "quantity": 10
+    },
+    {
+      "productId": "test-product2",
+      "quantity": 20
+    }
+  ]
+}

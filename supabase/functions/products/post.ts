@@ -5,15 +5,25 @@ import {
   makeValuesStringPlaceholders,
 } from "../../utils/sqlUtils.ts";
 
+interface ReqData {
+  products: Product[];
+}
+
 export async function postProducts(req: Request, pool: Pool) {
-  const inputs = (await req.json()) as Product[];
+  console.log(req);
+
+  const bodyText = await req.text();
+  console.log(bodyText, "bodyText");
+
+  const reqData = JSON.parse(bodyText) as ReqData;
+  const products = reqData.products;
 
   try {
     // Grab a connection from the pool
     const connection = await pool.connect();
     const query = `
     with InsertData(product_id, product_category_id, product_name) as (
-      values ${makeValuesStringPlaceholders(inputs.length, 3)}
+      values ${makeValuesStringPlaceholders(products.length, 3)}
     ), CheckedData as (
       select product_id, product_category_id, product_name
       from InsertData d
@@ -34,7 +44,7 @@ export async function postProducts(req: Request, pool: Pool) {
       // Run a query
       const result = await connection.queryArray({
         text: query,
-        args: makeArgs(inputs, [
+        args: makeArgs(products, [
           "productId",
           "productCategoryId",
           "productName",

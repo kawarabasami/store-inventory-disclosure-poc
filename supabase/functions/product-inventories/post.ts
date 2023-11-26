@@ -7,15 +7,25 @@ import { ProductInventory } from "../../domain/productInventory/types.ts";
 
 type ProductInventoryPost = Omit<ProductInventory, "updatedAt">;
 
+interface ReqData {
+  productInventories: ProductInventoryPost[];
+}
+
 export async function postProductInventories(req: Request, pool: Pool) {
-  const inputs = (await req.json()) as ProductInventoryPost[];
+  console.log(req);
+
+  const bodyText = await req.text();
+  console.log(bodyText, "bodyText");
+
+  const reqData = JSON.parse(bodyText) as ReqData;
+  const inventories = reqData.productInventories;
 
   try {
     // Grab a connection from the pool
     const connection = await pool.connect();
     const query = `
     with InsertData(product_id, quantity) as (
-      values ${makeValuesStringPlaceholders(inputs.length, 2)}
+      values ${makeValuesStringPlaceholders(inventories.length, 2)}
     ), CheckedData as (
       select product_id, quantity::integer
       from InsertData d
@@ -32,13 +42,13 @@ export async function postProductInventories(req: Request, pool: Pool) {
     RETURNING product_id;
   `;
     console.log(query);
-    console.log(makeArgs(inputs, ["productId", "quantity"]));
+    console.log(makeArgs(inventories, ["productId", "quantity"]));
 
     try {
       // Run a query
       const result = await connection.queryArray({
         text: query,
-        args: makeArgs(inputs, ["productId", "quantity"]),
+        args: makeArgs(inventories, ["productId", "quantity"]),
       });
 
       console.log(result);
