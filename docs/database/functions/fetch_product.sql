@@ -1,5 +1,5 @@
 -- 商品情報取得用ファンクション
-DROP FUNCTION fetch_product;
+DROP FUNCTION if exists fetch_product;
 CREATE FUNCTION fetch_product(target_product_id varchar)
   RETURNS TABLE (
       product_id varchar
