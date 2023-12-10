@@ -29,7 +29,7 @@ export default async function Home() {
               在庫検索システム
             </h2>
           </div>
-          <p className="mt-8 text-gray-600 dark:text-gray-400">
+          <p className="mt-8 text-gray-600 ">
             沖縄県恩納村唯一の建築資材店 <br />
             ライフポイントの在庫を検索できます
           </p>
@@ -60,7 +60,7 @@ export default async function Home() {
           <div className="flex flex-col justify-center items-center">
             <h3 className="mt-10 text-lg sm:text-xl">取り扱い品目数</h3>
 
-            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+            <p className="mt-2 text-sm text-gray-600 ">
               {format(new Date(), "yyyy/MM/dd HH:mm") + "更新"}
             </p>
             <div className="mt-5 sm:w-1/2">
