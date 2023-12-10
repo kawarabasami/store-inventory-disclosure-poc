@@ -1,7 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import SearchIcon from "@/../../public/icons/search.svg";
+import LoadingIcon from "@/../../public/icons/loading.svg";
 
 interface Args {
   value: string;
@@ -10,6 +11,17 @@ interface Args {
 }
 
 const SearchBox: React.FC<Args> = ({ value, onChange, onSearch }) => {
+  const [loading, setLoading] = useState(false);
+
+  const handleSearch = async () => {
+    setLoading(true);
+    try {
+      await onSearch(value);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div>
       <div className="relative z-10 flex space-x-3 p-3 bg-white border rounded-lg shadow-lg shadow-gray-100 ">
@@ -32,7 +44,7 @@ const SearchBox: React.FC<Args> = ({ value, onChange, onSearch }) => {
             }}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
-                onSearch(value);
+                handleSearch();
               }
             }}
           />
@@ -40,11 +52,14 @@ const SearchBox: React.FC<Args> = ({ value, onChange, onSearch }) => {
         <button
           className="flex-[0_0_auto]"
           onClick={() => {
-            onSearch(value);
+            handleSearch();
           }}
         >
           <span className="p-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm">
-            <SearchIcon />
+            {!loading && <SearchIcon className="w-4 h-4 " />}
+            {loading && (
+              <LoadingIcon className="w-4 h-4 text-gray-200 animate-spin fill-white" />
+            )}
           </span>
         </button>
       </div>
