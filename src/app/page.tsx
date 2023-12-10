@@ -19,8 +19,8 @@ export default async function Home() {
     <div className="relative overflow-hidden pt-10">
       <div className="max-w-none mx-auto py-5 sm:pt-6">
         <div className="text-center">
-          <div className="bg-[url('/cropped-minna.jpg')] bg-top bg-cover h-48 flex justify-center flex-col items-center">
-            <img src="/images/logo.png" width={70} height={70} alt="logo" />
+          <div className="bg-[url('/cropped-minna.webp')] bg-top bg-cover h-48 flex justify-center flex-col items-center">
+            <img src="/images/logo.webp" width={70} height={70} alt="logo" />
             <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 ">
               ライフポイント
             </h1>
