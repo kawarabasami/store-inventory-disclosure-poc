@@ -1,0 +1,32 @@
+
+@url = {{$dotenv SUPABASE_URL}}
+@anonKey = {{$dotenv SUPABASE_ANON_KEY}}
+
+post {{url}}/functions/v1/products
+Authorization: Bearer {{anonKey}}
+Content-Type: application/json
+
+{
+  "products": [
+    {
+      "productId": "test-product111",
+      "productName": "テスト商品1",
+      "productCategoryId": "1"
+    },
+    {
+      "productId": "test-product2",
+      "productName": "テスト商品2",
+      "productCategoryId": "2"
+    },
+    {
+      "productId": "test-product3",
+      "productName": "テスト商品3",
+      "productCategoryId": "3"
+    },
+    {
+      "productId": "test-product4",
+      "productName": "テスト商品44",
+      "productCategoryId": "499"
+    }
+  ]
+}
