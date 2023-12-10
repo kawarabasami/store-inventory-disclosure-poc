@@ -1,113 +1,86 @@
-import Image from 'next/image'
+/* eslint-disable @next/next/no-img-element */
+import SearchBoxAccent1 from "@/../public/images/SearchBoxAccent1.svg";
+import SearchBoxAccent2 from "@/../public/images/SearchBoxAccent2.svg";
+import SearchBoxTopPage from "./search/components/SearchBoxTopPage";
+import CategoryCountBox from "./components/CategoryCountBox";
+import {
+  calcCountProductsByCategory,
+  fetchAllCategories,
+} from "@/domain/productCategory/repository";
+import { format } from "date-fns";
 
-export default function Home() {
+export default async function Home() {
+  const categories = await fetchAllCategories();
+  const countsByCategory = await calcCountProductsByCategory();
+
+  // prerine UIから参考
+  // https://preline.co/examples/hero-forms.html
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <div className="relative overflow-hidden pt-10">
+      <div className="max-w-none mx-auto py-5 sm:pt-6">
+        <div className="text-center">
+          <div className="bg-[url('/cropped-minna.webp')] bg-top bg-cover h-48 flex justify-center flex-col items-center">
+            <img src="/images/logo.webp" width={70} height={70} alt="logo" />
+            <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 ">
+              ライフポイント
+            </h1>
+            {/* </div> */}
+            <h2 className="title-font text-xl sm:text-2xl my-4 font-medium text-orange-600">
+              在庫検索システム
+            </h2>
+          </div>
+          <p className="mt-8 text-gray-600 ">
+            沖縄県恩納村唯一の建築資材店 <br />
+            ライフポイントの在庫を検索できます
+          </p>
+
+          <div className="mt-8 sm:mt-16 mx-auto max-w-sm sm:max-w-xl relative">
+            <SearchBoxTopPage />
+            <div className="hidden md:block absolute top-0 right-0 -translate-y-12 translate-x-20">
+              <SearchBoxAccent1
+                className="w-16 h-auto text-orange-500"
+                width="121"
+                height="135"
+                viewBox="0 0 121 135"
+                fill="none"
+              />
+            </div>
+
+            <div className="hidden md:block absolute bottom-0 left-0 translate-y-10 -translate-x-32">
+              <SearchBoxAccent2
+                className="w-40 h-auto text-cyan-500"
+                width="347"
+                height="188"
+                viewBox="0 0 347 188"
+                fill="none"
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-col justify-center items-center">
+            <h3 className="mt-10 text-lg sm:text-xl">取り扱い品目数</h3>
+
+            <p className="mt-2 text-sm text-gray-600 ">
+              {format(new Date(), "yyyy/MM/dd HH:mm") + "更新"}
+            </p>
+            <div className="mt-5 sm:w-1/2">
+              {countsByCategory.map((c, index) => {
+                const category = categories.find(
+                  (cate) => cate.productCategoryId === c.productCategoryId
+                );
+                if (category == null) throw new Error("category can not find.");
+                return (
+                  <CategoryCountBox
+                    key={index}
+                    countInfo={c}
+                    category={category}
+                  />
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+    </div>
+  );
 }

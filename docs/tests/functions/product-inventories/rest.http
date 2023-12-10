@@ -1,0 +1,20 @@
+
+@url = {{$dotenv SUPABASE_URL}}
+@anonKey = {{$dotenv SUPABASE_ANON_KEY}}
+
+post {{url}}/functions/v1/product-inventories
+Authorization: Bearer {{anonKey}}
+Content-Type: application/json
+
+{
+  "productInventories": [
+    {
+      "productId": "test-product1",
+      "quantity": 10
+    },
+    {
+      "productId": "test-product2",
+      "quantity": 20
+    }
+  ]
+}
