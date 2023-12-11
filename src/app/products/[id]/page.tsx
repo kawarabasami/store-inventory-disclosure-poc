@@ -39,18 +39,16 @@ export default async function Page({ params }: { params: { id: string } }) {
       : ICON_OTHER;
   const isInStock = product.quantity != null && product.quantity > 0;
 
-  console.log(product);
-
   return (
     <div className="py-6 sm:py-8 lg:py-12">
-      <div className="mx-auto max-w-screen-xl px-4 md:px-8 flex flex-col items-center">
-        <div className="flex gap-8 items-center justify-center mb-10">
+      <div className="w-11/12 mx-auto max-w-screen-xl px-4 md:px-8 flex flex-col items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-4 sm:gap-5 items-center justify-center mb-10">
           {/* images - start */}
-          <div className="gap-4">
-            <div className="relative overflow-hidden rounded-lg bg-gray-100 lg:col-span-4">
+          <div className="col-span-1 w-full flex justify-center">
+            <div className="relative overflow-hidden rounded-lg lg:col-span-4">
               <IconifyWrapper
                 icon={icon.id}
-                size="10rem"
+                size="8rem"
                 color={icon.color}
                 bgColor={icon.bgColor}
                 containerClassName="rounded-xl"
@@ -59,7 +57,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           </div>
           {/* images - end */}
           {/* content - start */}
-          <div className="pt-8 pr-5 sm:pr-10">
+          <div className="col-span-1 sm:col-span-3 pt-8 pr-5 sm:pr-10 ">
             {/* name - start */}
             <div className="mb-2 md:mb-3">
               <h2 className="mb-3 text-2xl font-bold text-gray-800 lg:text-3xl">
