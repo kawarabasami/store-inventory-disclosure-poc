@@ -11,8 +11,9 @@ import { ProductCategory } from "@/domain/productCategory/types";
 import SearchBox from "../components/SearchBox";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Loading from "./components/Loading";
+import { saveQueryHistory } from "@/domain/searchQueryHistory/repository";
 
-export default function Home() {
+export default function Search() {
   // Flowriftから参考
   // https://flowrift.com/c/shopping-cart/1DPLi?view=preview
 
@@ -34,6 +35,9 @@ export default function Home() {
     setLoading(true);
     setResult(await searchProducts(value));
     setLoading(false);
+
+    // 検索履歴を残す
+    saveQueryHistory(value);
   };
 
   // 初期処理
