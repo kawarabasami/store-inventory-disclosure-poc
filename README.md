@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Store Inventory Disclosure(店舗在庫情報公開アプリケーション)
 
-## Getting Started
+## 概要
 
-First, run the development server:
+このアプリケーションは、店舗の在庫情報を外部に公開するサンプルです。
+お客様側で商品の在庫状況を確認できるようにすることで、集客・問い合わせの増加を狙います。
+また、検索されたワードを蓄積することで、商品需要の分析に繋げることができます。
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 機能
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- 在庫検索サイト
+  - 商品名による在庫検索
+  - 商品カテゴリごとの取り扱い品目数の集計・表示
+  - 商品ごとの詳細ページの表示
+- 商品情報・在庫情報の登録 API
+- 販売管理システム(商蔵奉行)から商品情報・在庫情報の CSV 出力、及び在庫情報の登録
+  - Power Automate Desktop による作業自動化
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## デモサイト
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- [ライフポイント 在庫検索](https://store-inventory-disclosure-poc.pages.dev/)
 
-## Learn More
+## 使用技術
 
-To learn more about Next.js, take a look at the following resources:
+| カテゴリ       | 利用技術                                           |
+| -------------- | -------------------------------------------------- |
+| Frontend       | TypeScript, React, Next.js(SSG + SPA), TailwindCSS |
+| Backend        | TypeScript                                         |
+| Infrastructure | CloudFlare, Supabase                               |
+| Database       | PostgreSQL                                         |
+| etc...         | Power Automate Desktop                             |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## システム構成図
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+TODO
 
-## Deploy on Vercel
+## ER 図
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+TODO
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 設定手順
+
+### 在庫検索サイト
+
+1. Supabase のセットアップ
+   1. 新規プロジェクトの作成
+   2. Databases -> Extensions から下記拡張機能を有効化
+      - pgroonga
+   3. database フォルダ内の`.sql`ファイルを全て実行し、Table 及び Function を作成
+      - TODO: Row Level Security について記載
+   4. 各マスタに商品情報、在庫情報を登録
+2. 本プロジェクトの設定
+   1. 本プロジェクトを clone
+   2. `.env`ファイルを`.env.local`にコピーし、環境変数に Supabase プロジェクトの情報を設定
+      - `NEXT_PUBLIC_SUPABASE_URL` : Project Settings -> Database -> API -> Project URL の`URL`から転記
+      - `NEXT_PUBLIC_SUPABASE_ANON_KEY` : Project Settings -> Database -> Project API keys から転記
+   3. `npm run dev`で起動
+
+### 商品情報・在庫情報の登録 API
+
+TODO
