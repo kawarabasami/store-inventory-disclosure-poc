@@ -1,4 +1,5 @@
 -- product_categories
+-- drop table if exists public.product_categories;
 create table
   public.product_categories (
     product_category_id character varying not null,
@@ -10,6 +11,7 @@ create table
   ) tablespace pg_default;
 
 -- products
+-- drop table if exists public.products;
 create table
   public.products (
     product_id character varying not null,
@@ -52,6 +54,7 @@ with
   ) tablespace pg_default;
 
 -- product_inventories
+-- drop table if exists public.product_inventories;
 create table
   public.product_inventories (
     product_id character varying not null,
@@ -60,3 +63,12 @@ create table
     constraint product_inventories_pkey primary key (product_id),
     constraint product_inventories_product_id_fkey foreign key (product_id) references products (product_id)
   ) tablespace pg_default;
+
+-- search_query_history
+-- drop table if exists public.search_query_history;
+create table search_query_history (
+  id serial not null,
+  query character varying not null,
+  created_at timestamp with time zone not null default now(),
+  primary key (id)
+) tablespace pg_default;
