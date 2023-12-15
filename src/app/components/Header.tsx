@@ -1,17 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
+import Head from "next/head";
 import React from "react";
 
 function Header() {
   return (
     <>
-      <link
-        key="preload-minna"
-        rel="preload"
-        fetchPriority="high"
-        as="image"
-        href="/cropped-minna.webp"
-        type="image/webp"
-      />
+      <Head>
+        {/* LCPコンテンツのプリロード */}
+        <link
+          rel="preload"
+          fetchPriority="high"
+          as="image"
+          href="/cropped-minna.webp"
+          type="image/webp"
+        />
+      </Head>
       <div className="mx-auto max-w-screen-2xl px-4 md:px-8 bg-[url('/cropped-minna.webp')] bg-top bg-cover ">
         <header className="flex items-center justify-center py-4 ">
           {/* logo - start */}

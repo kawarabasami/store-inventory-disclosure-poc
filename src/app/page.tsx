@@ -18,9 +18,10 @@ export default async function Home() {
   // https://preline.co/examples/hero-forms.html
   return (
     <>
+      {/* TODO: Headタグ内が反映されない件調査 */}
       <Head>
+        {/* LCPコンテンツのプリロード */}
         <link
-          key="preload-minna"
           rel="preload"
           fetchPriority="high"
           as="image"
