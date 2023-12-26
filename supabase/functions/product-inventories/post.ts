@@ -19,13 +19,14 @@ export async function postProductInventories(req: Request, pool: Pool) {
 
   const reqData = JSON.parse(bodyText) as ReqData;
   const inventories = reqData.productInventories;
+  const filteredInv = inventories.filter((i) => i.quantity >= 0);
 
   try {
     // Grab a connection from the pool
     const connection = await pool.connect();
     const query = `
     with InsertData(product_id, quantity) as (
-      values ${makeValuesStringPlaceholders(inventories.length, 2)}
+      values ${makeValuesStringPlaceholders(filteredInv.length, 2)}
     ), CheckedData as (
       select product_id, quantity::integer
       from InsertData d
@@ -41,14 +42,16 @@ export async function postProductInventories(req: Request, pool: Pool) {
       , updated_at = excluded.updated_at
     RETURNING product_id;
   `;
+    const args = makeArgs(filteredInv, ["productId", "quantity"]);
+
     console.log(query);
-    console.log(makeArgs(inventories, ["productId", "quantity"]));
+    console.log(args);
 
     try {
       // Run a query
       const result = await connection.queryArray({
         text: query,
-        args: makeArgs(inventories, ["productId", "quantity"]),
+        args,
       });
 
       console.log(result);
