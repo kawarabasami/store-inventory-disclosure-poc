@@ -1,0 +1,10 @@
+File.ReadFromCSVFile.ReadCSV CSVFile: $'''C:\\Users\\kawar\\OneDrive\\在庫検索システム登録用\\商品在庫情報.csv''' Encoding: File.CSVEncoding.UTF8 TrimFields: True FirstLineContainsColumnNames: True ColumnsSeparator: File.CSVColumnsSeparator.SystemDefault CSVTable=> CSVTable
+SET productInventories TO { 'productInventories': CSVTable }
+Variables.ConvertCustomObjectToJson CustomObject: productInventories Json=> CustomObjectAsJson
+Text.Replace Text: CustomObjectAsJson TextToFind: $'''商品コード''' IsRegEx: False IgnoreCase: False ReplaceWith: $'''productId''' ActivateEscapeSequences: False Result=> Replaced
+Text.Replace Text: Replaced TextToFind: $'''現品残数''' IsRegEx: False IgnoreCase: False ReplaceWith: $'''quantity''' ActivateEscapeSequences: False Result=> reqJson
+Web.InvokeWebService.InvokeWebService Url: $'''https://xxxxxx.supabase.co/functions/v1/product-inventories''' Method: Web.Method.Post Accept: $'''application/json''' ContentType: $'''application/json''' CustomHeaders: $'''Authorization: Bearer xxxxxxxxxxxx''' RequestBody: reqJson ConnectionTimeout: 30 FollowRedirection: True ClearCookies: False FailOnErrorStatus: False EncodeRequestBody: False UserAgent: $'''Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.21) Gecko/20100312 Firefox/3.6''' Encoding: Web.Encoding.AutoDetect AcceptUntrustedCertificates: False ResponseHeaders=> WebServiceResponseHeaders Response=> WebServiceResponse StatusCode=> StatusCode
+IF StatusCode <> 200 THEN
+    Display.ShowMessageDialog.ShowMessage Title: $'''商品在庫登録''' Message: $'''商品在庫時にエラーが発生しました。処理を中断します。''' Icon: Display.Icon.ErrorIcon Buttons: Display.Buttons.OK DefaultButton: Display.DefaultButton.Button1 IsTopMost: False ButtonPressed=> ButtonPressed
+    EXIT Code: 0 ErrorMessage: $'''商品在庫時にエラーが発生しました。処理を中断します。'''
+END
