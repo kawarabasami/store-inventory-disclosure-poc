@@ -1,0 +1,5 @@
+CALL 奉行からCSV出力
+CALL 商品情報登録
+CALL 商品在庫登録
+CALL デプロイ
+Display.ShowMessageDialog.ShowMessage Title: $'''正常終了''' Message: $'''商品在庫情報の登録処理が完了しました''' Icon: Display.Icon.None Buttons: Display.Buttons.OK DefaultButton: Display.DefaultButton.Button1 IsTopMost: True ButtonPressed=> ButtonPressed2

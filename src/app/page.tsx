@@ -9,10 +9,17 @@ import {
 } from "@/domain/productCategory/repository";
 import { format } from "date-fns";
 import Head from "next/head";
+import { getInventoriesLatestUpdatedAt } from "@/domain/product/repository";
+
+function formatDate(date: Date | null) {
+  if (date == null) return "";
+  return `${format(date, "yyyy/MM/dd HH:mm")} 更新`;
+}
 
 export default async function Home() {
   const categories = await fetchAllCategories();
   const countsByCategory = await calcCountProductsByCategory();
+  const updatedAt = await getInventoriesLatestUpdatedAt();
 
   // prerine UIから参考
   // https://preline.co/examples/hero-forms.html
@@ -74,7 +81,7 @@ export default async function Home() {
               <h3 className="mt-10 text-lg sm:text-xl">取り扱い品目数</h3>
 
               <p className="mt-2 text-sm text-gray-600 ">
-                {format(new Date(), "yyyy/MM/dd HH:mm") + "更新"}
+                {formatDate(updatedAt)}
               </p>
               <div className="mt-5 sm:w-1/2">
                 {countsByCategory.map((c, index) => {
