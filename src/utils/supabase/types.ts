@@ -110,6 +110,24 @@ export interface Database {
           }
         ]
       }
+      search_query_history: {
+        Row: {
+          created_at: string
+          id: number
+          query: string
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          query: string
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          query?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -144,6 +162,12 @@ export interface Database {
           product_category_name: string
           quantity: number
           updated_at: string
+        }[]
+      }
+      get_product_inventries_latest_updated_at: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          latest_updated_at: string
         }[]
       }
       search_products: {

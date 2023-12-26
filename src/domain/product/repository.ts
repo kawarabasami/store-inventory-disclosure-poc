@@ -72,3 +72,15 @@ export async function fetchProduct(productId: string): Promise<Product | null> {
 
   return head(ret) ?? null;
 }
+
+export async function getInventoriesLatestUpdatedAt(): Promise<Date | null> {
+  const { data, error } = await supabase.rpc(
+    "get_product_inventries_latest_updated_at"
+  );
+  if (error) throw error;
+
+  const ret = head(data)?.latest_updated_at;
+  if (ret == null) return null;
+
+  return new Date(ret);
+}
