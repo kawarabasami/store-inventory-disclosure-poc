@@ -1,0 +1,12 @@
+on:
+  schedule:
+    - cron: "0 0 */5 * *" # 5日毎に実行する
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: deploy to CloudFlarePages(dev)
+        run: curl -X POST "${{secrets.CF_PAGES_DEPLOY_WEBHOOK_URL_DEV}}"
+      - name: deploy to CloudFlarePages(pro)
+        run: curl -X POST "${{secrets.CF_PAGES_DEPLOY_WEBHOOK_URL_PRO}}"
