@@ -10,11 +10,11 @@ Content-Type: application/json
   "productInventories": [
     {
       "productId": "test-product1",
-      "quantity": 10
+      "quantity": "10"
     },
     {
       "productId": "test-product2",
-      "quantity": 20
+      "quantity": "15.0"
     }
   ]
 }
