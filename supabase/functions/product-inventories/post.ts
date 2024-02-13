@@ -3,12 +3,10 @@ import {
   makeArgs,
   makeValuesStringPlaceholders,
 } from "../../utils/sqlUtils.ts";
-import { ProductInventory } from "../../domain/productInventory/types.ts";
-
-type ProductInventoryPost = Omit<ProductInventory, "updatedAt">;
+import { ProductInventoryPayload } from "../../domain/productInventory/types.ts";
 
 interface ReqData {
-  productInventories: ProductInventoryPost[];
+  productInventories: ProductInventoryPayload[];
 }
 
 export async function postProductInventories(req: Request, pool: Pool) {
@@ -18,7 +16,10 @@ export async function postProductInventories(req: Request, pool: Pool) {
   console.log(bodyText, "bodyText");
 
   const reqData = JSON.parse(bodyText) as ReqData;
-  const inventories = reqData.productInventories;
+  const inventories = reqData.productInventories.map((p) => ({
+    ...p,
+    quantity: Number(p.quantity),
+  }));
   const filteredInv = inventories.filter((i) => i.quantity >= 0);
 
   try {

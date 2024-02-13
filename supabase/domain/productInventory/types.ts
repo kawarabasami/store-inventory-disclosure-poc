@@ -3,3 +3,8 @@ export interface ProductInventory {
   quantity: number;
   updatedAt: Date;
 }
+
+export interface ProductInventoryPayload {
+  productId: string;
+  quantity: string;
+}
