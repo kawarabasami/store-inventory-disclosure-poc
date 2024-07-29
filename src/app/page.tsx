@@ -10,6 +10,8 @@ import {
 import { format } from "date-fns";
 import Head from "next/head";
 import { getInventoriesLatestUpdatedAt } from "@/domain/product/repository";
+import { Suspense } from "react";
+import Loading from "./search/components/Loading";
 
 function formatDate(date: Date | null) {
   if (date == null) return "";
@@ -24,7 +26,7 @@ export default async function Home() {
   // prerine UIから参考
   // https://preline.co/examples/hero-forms.html
   return (
-    <>
+    <Suspense fallback={<Loading />}>
       {/* TODO: Headタグ内が反映されない件調査 */}
       <Head>
         {/* LCPコンテンツのプリロード */}
@@ -103,6 +105,6 @@ export default async function Home() {
           </div>
         </div>
       </div>
-    </>
+    </Suspense>
   );
 }

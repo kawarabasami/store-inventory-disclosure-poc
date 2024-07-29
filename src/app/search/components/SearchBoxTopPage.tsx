@@ -1,33 +1,36 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { Suspense, useCallback, useEffect, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import SearchBox from "@/app/components/SearchBox";
+import Loading from "./Loading";
 
 const SearchBoxTopPage = () => {
   const router = useRouter();
   const pathname = usePathname();
   const [query, setQuery] = useState("");
-  const searchParams = useSearchParams();
 
-  useEffect(() => {
-    setQuery(searchParams.get("q") ?? "");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const SearchParamsComponent = () => {
+    const searchParams = useSearchParams();
 
-  const createQueryParam = useCallback(
-    (name: string, value: string) => {
-      if (!value) return "";
+    useEffect(() => {
+      setQuery(searchParams.get("q") ?? "");
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
-      const params = new URLSearchParams(searchParams);
-      params.set(name, value);
+    const createQueryParam = useCallback(
+      (name: string, value: string) => {
+        if (!value) return "";
 
-      return `?${params.toString()}`;
-    },
-    [searchParams]
-  );
-  return (
-    <div>
+        const params = new URLSearchParams(searchParams);
+        params.set(name, value);
+
+        return `?${params.toString()}`;
+      },
+      [searchParams]
+    );
+
+    return (
       <SearchBox
         value={query}
         onChange={(value) => {
@@ -44,7 +47,13 @@ const SearchBoxTopPage = () => {
           });
         }}
       />
-    </div>
+    );
+  };
+
+  return (
+    <Suspense fallback={<Loading />}>
+      <SearchParamsComponent />
+    </Suspense>
   );
 };
 

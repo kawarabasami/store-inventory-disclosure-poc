@@ -5,7 +5,7 @@ import { searchProducts } from "@/domain/product/repository";
 import ProductView from "./components/ProductView";
 import { fetchAllCategories } from "@/domain/productCategory/repository";
 import { ICON_OTHER } from "@/domain/productCategory/constants";
-import { useCallback, useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
 import { Product } from "@/domain/product/types";
 import { ProductCategory } from "@/domain/productCategory/types";
 import SearchBox from "../components/SearchBox";
@@ -13,7 +13,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Loading from "./components/Loading";
 import { saveQueryHistory } from "@/domain/searchQueryHistory/repository";
 
-export default function Search() {
+function SearchComponent() {
   // Flowriftから参考
   // https://flowrift.com/c/shopping-cart/1DPLi?view=preview
 
@@ -113,5 +113,13 @@ export default function Search() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function Search() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SearchComponent />
+    </Suspense>
   );
 }

@@ -6,8 +6,7 @@
   // デフォルトフォーマッターをPrettierに指定
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.codeActionsOnSave": {
-    // ファイル保存時に ESLint でフォーマット
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": "explicit"
   },
   "[markdown]": {
     "files.trimTrailingWhitespace": false
