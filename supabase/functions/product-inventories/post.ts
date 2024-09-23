@@ -1,9 +1,9 @@
 import { Pool } from "https://deno.land/x/postgres@v0.17.0/mod.ts";
+import { ProductInventory } from "../core/domain/productInventory/types.ts";
 import {
-  makeArgs,
   makeValuesStringPlaceholders,
-} from "../../utils/sqlUtils.ts";
-import { ProductInventory } from "../../domain/productInventory/types.ts";
+  makeArgs,
+} from "../core/utils/sqlUtils.ts";
 
 type ProductInventoryPost = Omit<ProductInventory, "updatedAt">;
 
