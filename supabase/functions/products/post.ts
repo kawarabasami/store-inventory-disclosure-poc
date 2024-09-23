@@ -1,9 +1,9 @@
 import { Pool } from "https://deno.land/x/postgres@v0.17.0/mod.ts";
-import { Product } from "../../domain/product/types.ts";
+import { Product } from "../core/domain/product/types.ts";
 import {
-  makeArgs,
   makeValuesStringPlaceholders,
-} from "../../utils/sqlUtils.ts";
+  makeArgs,
+} from "../core/utils/sqlUtils.ts";
 
 interface ReqData {
   products: Product[];

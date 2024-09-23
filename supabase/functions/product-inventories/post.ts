@@ -1,9 +1,9 @@
 import { Pool } from "https://deno.land/x/postgres@v0.17.0/mod.ts";
+import { ProductInventory } from "../core/domain/productInventory/types.ts";
 import {
-  makeArgs,
   makeValuesStringPlaceholders,
-} from "../../utils/sqlUtils.ts";
-import { ProductInventory } from "../../domain/productInventory/types.ts";
+  makeArgs,
+} from "../core/utils/sqlUtils.ts";
 
 type ProductInventoryPost = Omit<ProductInventory, "updatedAt">;
 
@@ -19,7 +19,14 @@ export async function postProductInventories(req: Request, pool: Pool) {
 
   const reqData = JSON.parse(bodyText) as ReqData;
   const inventories = reqData.productInventories;
-  const filteredInv = inventories.filter((i) => i.quantity >= 0);
+  const filteredInv = inventories
+    .filter((i) => i.quantity >= 0)
+    .map((i) => ({
+      ...i,
+      quantity: Number.isInteger(i.quantity)
+        ? i.quantity
+        : Math.floor(i.quantity), // 小数以下で在庫数を調整することがあるが、システム側では小数以下切り捨てで管理する
+    }));
 
   try {
     // Grab a connection from the pool
