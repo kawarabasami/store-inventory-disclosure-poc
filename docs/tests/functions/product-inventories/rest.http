@@ -18,3 +18,23 @@ Content-Type: application/json
     }
   ]
 }
+
+### 小数以下の登録テスト
+
+
+post {{url}}/functions/v1/product-inventories
+Authorization: Bearer {{anonKey}}
+Content-Type: application/json
+
+{
+  "productInventories": [
+    {
+      "productId": "test-product1",
+      "quantity": 10.5
+    },
+    {
+      "productId": "test-product2",
+      "quantity": 20
+    }
+  ]
+}
